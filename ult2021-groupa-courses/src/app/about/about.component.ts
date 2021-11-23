@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
@@ -12,6 +13,8 @@ export class AboutComponent implements OnInit {
     age: "25",
     email: "john.doe@gmail.com"
   }
+
+  public today = new Date();
 
   constructor() { }
 
