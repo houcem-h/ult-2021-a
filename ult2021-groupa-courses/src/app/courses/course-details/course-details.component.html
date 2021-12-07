@@ -20,6 +20,7 @@
     <ul>
       <li *ngFor="let requirement of course?.requirements">{{ requirement }}</li>
     </ul>
+    <button (click)="addToCart(course?.id)" type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
     <p class="card-text text-end"><small class="text-muted">Last updated: {{ course?.last_update }}</small></p>
   </div>
 </div>
