@@ -10,7 +10,7 @@ import { courses } from "src/app/courses-list";
 })
 export class CourseDetailsComponent implements OnInit {
 
-  private course?: any;
+  public course?: any;
 
   constructor(
     private route: ActivatedRoute
