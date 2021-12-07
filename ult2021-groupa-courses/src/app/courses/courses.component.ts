@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from "src/app/services/cart.service";
 
 import { courses } from "src/app/courses-list";
 
@@ -9,23 +10,16 @@ import { courses } from "src/app/courses-list";
 })
 export class CoursesComponent implements OnInit {
 
-  public cartContent:any[] = [];
-
   public coursesList = courses;
 
-  constructor() { }
+  constructor(
+    private cartService: CartService,
+  ) { }
 
   ngOnInit(): void {
-    this.cartContent = JSON.parse(localStorage.getItem('cart') || '[]')
   }
 
   addToCart(id: string) {
-    const course = this.cartContent.filter(course => course.id == id)[0];
-    if (course) {
-      course.quantity++;
-    } else {
-      this.cartContent.push({id: id, quantity: 1})
-    }
-    localStorage.setItem('cart', JSON.stringify(this.cartContent));
+    this.cartService.add(id);
   }
 }
