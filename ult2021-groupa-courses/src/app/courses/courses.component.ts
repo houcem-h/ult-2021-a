@@ -17,4 +17,7 @@ export class CoursesComponent implements OnInit {
     console.log(this.coursesList);
   }
 
+  addToCart(id: string) {
+    localStorage.setItem('cart', id);
+  }
 }
