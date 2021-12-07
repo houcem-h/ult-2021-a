@@ -20,7 +20,12 @@ export class CoursesComponent implements OnInit {
   }
 
   addToCart(id: string) {
-    this.cartContent.push(id)
+    const course = this.cartContent.filter(course => course.id == id)[0];
+    if (course) {
+      course.quantity++;
+    } else {
+      this.cartContent.push({id: id, quantity: 1})
+    }
     localStorage.setItem('cart', JSON.stringify(this.cartContent));
   }
 }
