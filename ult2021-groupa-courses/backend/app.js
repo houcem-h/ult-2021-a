@@ -9,7 +9,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/courses', (req, res) => {
+app.get('/api/courses', (req, res) => {
   const courses = [
       {
         id: '8f4aa769-7841-424c-a817-a6b50ae75c66',
