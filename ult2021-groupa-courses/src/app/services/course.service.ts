@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  private apiUrl = 'http://localhost:3000/courses';
+
+  constructor(private http: HttpClient) { }
 
   /**
    * Get all courses
    * @returns Observable<Course[]>
    */
-   all() {
-     return this.http.get("http://localhost:3000/courses");
+  all() {
+    return this.http.get(this.apiUrl);
   }
 
 
@@ -25,6 +26,7 @@ export class CourseService {
    * @returns Observable<Course>
    */
   get(id: string) {
+    return this.http.get(this.apiUrl + '/' + id)
   }
 
   /**
@@ -32,7 +34,7 @@ export class CourseService {
    * @param course new course to create
    */
   create(course: any) {
-
+    return this.http.post(this.apiUrl, course);
   }
 
   /**
@@ -41,6 +43,7 @@ export class CourseService {
    * @param course new course data
    */
   update(id: string, course: any) {
+    return this.http.put(this.apiUrl + '/' + id, course);
   }
 
   /**
@@ -48,6 +51,6 @@ export class CourseService {
    * @param id course id to delete
    */
   delete(id: string) {
-
+    return this.http.delete(this.apiUrl + '/' + id)
   }
 }
