@@ -15,6 +15,7 @@ export class CourseService {
    * @returns Observable<Course[]>
    */
    all() {
+     return this.http.get("http://localhost:3000/courses");
   }
 
 
