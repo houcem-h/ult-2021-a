@@ -29,4 +29,13 @@ export class CartService {
    load() {
     return this.localStorageService.get('cart');
    }
+
+   clear() {
+    //  1st method
+    // this.localStorageService.clear('cart');
+
+    // 2nd method
+    this.cartContent = [];
+    this.localStorageService.set('cart', this.cartContent);
+   }
 }
