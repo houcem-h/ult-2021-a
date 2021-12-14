@@ -23,4 +23,10 @@ app.get('/api/courses', (req, res) => {
         .catch(err => res.status(400).json({ message: err.message }));
 });
 
+app.get('/api/courses/:id', (req, res, next) => {
+  Course.findOne({ _id: req.params.id })
+      .then(course => res.status(200).json(course))
+      .catch(error => res.status(404).json({ error }));
+  });
+
 module.exports = app;
