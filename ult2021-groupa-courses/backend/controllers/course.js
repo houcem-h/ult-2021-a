@@ -16,10 +16,25 @@ exports.get = ((req, res, next) => {
 
 // store a new course
 exports.create = (req, res, next) => {
+  console.log(req);
   const course = new Course({
     ...req.body
   });
   course.save()
     .then(() => res.status(201).json({ message: 'Course created  !'}))
+    .catch(error => res.status(400).json({ error }));
+}
+
+// update a course by id
+exports.update = (req, res, next) => {
+  Course.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+    .then(() => res.status(200).json({ message: 'Course updated !'}))
+    .catch(error => res.status(400).json({ error }));
+}
+
+// delete a course by id
+exports.delete = (req, res, next) => {
+  Course.deleteOne({ _id: req.params.id })
+    .then(() => res.status(200).json({ message: 'Course deleted !'}))
     .catch(error => res.status(400).json({ error }));
 }
