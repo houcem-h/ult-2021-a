@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Course = require('./models/course');
+
+const courseRoutes = require('./routes/courses')
 
 const app = express();
 
@@ -17,16 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api/courses', (req, res) => {
-  Course.find()
-        .then(courses => res.status(200).json(courses))
-        .catch(err => res.status(400).json({ message: err.message }));
-});
+app.use('/api/course', courseRoutes);
 
-app.get('/api/courses/:id', (req, res, next) => {
-  Course.findOne({ _id: req.params.id })
-      .then(course => res.status(200).json(course))
-      .catch(error => res.status(404).json({ message: error.message }));
-  });
 
 module.exports = app;
