@@ -22,7 +22,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCartContentDetails();
-    this.computeTotalPrice();
   }
 
   getCartContentDetails() {
@@ -35,11 +34,12 @@ export class CartComponent implements OnInit {
           this.cartContent[index].title = course.title;
           this.cartContent[index].price = course.price;
         }
+        this.computeTotalPrice();
       }
     );
   }
   computeTotalPrice() {
-    this.cartContent.forEach((item: { price: number; quantity: number; }) => {
+  this.cartContent.forEach((item: { price: number; quantity: number; }) => {
       this.totalPrice += item.price * item.quantity;
     });
   }
