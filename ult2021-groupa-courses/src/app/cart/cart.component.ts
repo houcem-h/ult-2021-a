@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from "src/app/services/cart.service";
+import { CourseService } from "src/app/services/course.service";
 
-import { courses } from "src/app/courses-list";
+// import { courses } from "src/app/courses-list";
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,8 @@ export class CartComponent implements OnInit {
   TAX_RATE: number = 0.2;
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private courseService: CourseService
   ) { }
 
   ngOnInit(): void {
@@ -25,11 +27,16 @@ export class CartComponent implements OnInit {
 
   getCartContentDetails() {
     this.cartContent = this.cartService.cartContent;
-    for (let index = 0; index < this.cartContent.length; index++) {
-      const course = courses.filter(course => course.id == this.cartContent[index].id)[0];
-      this.cartContent[index].title = course.title;
-      this.cartContent[index].price = course.price;
-    }
+    this.courseService.all().subscribe(
+      res => {
+        const courses = Object.values(res);
+        for (let index = 0; index < this.cartContent.length; index++) {
+          const course = courses.filter(course => course._id == this.cartContent[index].id)[0];
+          this.cartContent[index].title = course.title;
+          this.cartContent[index].price = course.price;
+        }
+      }
+    );
   }
   computeTotalPrice() {
     this.cartContent.forEach((item: { price: number; quantity: number; }) => {
