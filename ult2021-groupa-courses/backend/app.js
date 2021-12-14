@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/course', courseRoutes);
+app.use('/api/courses', courseRoutes);
 
 
 module.exports = app;
