@@ -16,7 +16,6 @@ exports.get = ((req, res, next) => {
 
 // store a new course
 exports.create = (req, res, next) => {
-  console.log(req);
   const course = new Course({
     ...req.body
   });
